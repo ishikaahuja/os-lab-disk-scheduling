@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int ip[20],head,le[20],r[10],temp,i,j=0,k=0,l,m,n;
+    int seek=0;
+    int low=0,high=100;
+    printf("n:-");
+    scanf("%d",&n);
+    printf("q:-\n");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&ip[i]);
+    }
+    printf("head");
+    scanf("%d",&head);
+    for(i=0;i<n;i++)
+    {
+        if(head<ip[i])
+        {
+            r[j]=ip[i];
+            j++;
+        }else
+        {
+            le[k]=ip[i];
+            k++;
+        }
+    }
+    for(i=0;i<j;i++)
+    {
+        for(l=i+1;l<j;l++)
+        {
+            if(r[i]>r[l])
+            {
+                temp=r[i];
+                r[i]=r[l];
+                r[l]=temp;
+            }
+        }
+    }
+    for(i=0;i<k;i++)
+    {
+        for(l=i+1;l<k;l++)
+        {
+            if(le[i]>le[l])
+            {
+                temp=le[i];
+                le[i]=le[l];
+                le[l]=temp;
+            }
+        }
+    }
+    ip[0]=head;
+    for(i=1,l=0;l<j;l++,i++)
+    {
+        ip[i]=r[l];
+    }
+    ip[i]=high;
+    ip[i+1]=low;
+    for(i=i+2,l=0;l<k;l++,i++)
+    {
+        ip[i]=le[l];
+    }
+    for(i=0;i<n+3;i++)
+    {
+        printf("%d\n",ip[i]);
+    }
+    for(i=0;i<n+2;i++)
+    {
+        seek=seek+abs(ip[i+1]-ip[i]);
+        printf("seek%d-%d->%d\n",i+1,i,seek);
+    }
+    printf("%d\n",seek);
+    printf("%d",j);
+
+}
